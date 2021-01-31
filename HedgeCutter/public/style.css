@@ -1,0 +1,316 @@
+/*:root {
+    --primary-color: #FFFFFF;
+  ;
+}*/
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/*default settings*/
+html {
+  --ft-color: #3ED489;
+  --bck-color: #FFFFFF;
+  --lgt-color: #4C5D69;
+  --track-color: #EEEEEE; 
+  --ln-color: #767676; 
+}
+
+html.dark {
+  --ft-color: #93E9BE;
+  --bck-color: #32373A;
+  --lgt-color:  #EEEEEE;
+  --track-color:#4C5D69;
+  --ln-color: #767676; 
+}
+
+body {
+  height: 100%;
+  /* margin: 0 auto; */
+  font-size: 16px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 100;
+  line-height: 1.2em;
+  background: var(--bck-color);
+  color:var(--ft-color);
+  padding: 0.75rem;
+  /* overflow-x: hidden; */
+}
+
+.nav {
+  background-color: var(--bck-color);
+  width: 100%;
+  /*margin-top: 15px;*/
+  /*position: relative;*/
+  opacity: 0.8;
+  min-height: 7%;
+  margin-bottom: 0.75rem;
+  padding-top: 0.75rem;
+
+  text-align: left;
+  letter-spacing: 0.75rem;
+  text-transform: uppercase;
+  /*display: block;*/
+}
+
+.logo img{
+  width: 1.4rem;
+  height: auto;
+  margin-right: 0.3rem;
+}
+
+.name { 
+  left:12%;
+  font-size: 1.75rem;
+  letter-spacing: 0.625rem;
+  color: var(--ft-color);
+  margin-bottom: 0;
+}
+
+.notif {
+  display: inline-block;
+  right: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  outline: none;
+  margin: none;
+  padding: 0;
+  font-size: 1.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 0.5rem;
+  color:var(--lgt-color);
+}
+
+.btn:hover {
+  opacity: 0.8;
+  background: none;
+  color:var(--ft-color);
+}
+
+h4
+{
+  font-family: 'Open Sans', sans-serif;
+}
+
+h5
+{
+  font-family: 'Robot', sans-serif;
+}
+
+.tweet-box p{
+    font-size: 0.75rem;
+    font-family: 'Roboto', sans-serif;
+  }
+
+.row
+{
+  display: flex;
+  margin: 0;
+}
+
+.tweet-nav
+{
+    flex: 25%;
+    max-height: calc(100vh - 6.25rem);
+    overflow-y: scroll;
+    display: inline-block;
+    border-style: solid;
+    border-right: none;
+    border-width: 20% /*0.0625rem*/;
+    border-color:var(--track-color);
+}
+
+.flex-container
+{
+  display: flex;
+}
+
+.tweet-box
+{
+  flex: 30%;
+  background-color: var(--bck-color);
+  border-style: solid;
+  border-width: 0.0625rem;
+  border-color: var(--track-color);
+  color: var(--lgt-color);
+  padding: 0.625rem;
+  word-break: break-word;
+  cursor: pointer;
+  /*width: 25rem;*/
+}
+
+.tweet-box:hover
+{
+  background-color: var(--track-color);
+}
+
+.tweet-box h4
+{
+  margin: 0;
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.tweet-box h5
+{
+  margin: 0;
+  font-size: 0.75rem;
+  font-family: 'Robot', sans-serif;
+}
+
+.tweet-tag
+{
+  color: var(--ft-color);
+}
+
+.tweet-box p
+{
+  margin-bottom: 0.8125rem;
+  line-height: 1.5;
+}
+
+.profile-pic
+{
+  flex: left;
+  margin-right: 0.9375rem;
+  font-size: 2.125rem;
+}
+
+/*.tweet-icon
+{
+  margin-right: 2rem;
+  color: var(--lgt-color);
+}*/
+
+hr {
+    top: 10%;
+    display: block;
+    border: solid 0.0625rem;
+    color: var(--ln-color);           
+    width: 100%;
+    text-align:left;
+    margin-left:0;
+}
+
+.graph
+{
+  /*max-width: 920px;
+  width: 70%; 100%;
+  top:30%;
+  right:10%;*/
+  border-style: solid;
+  border-width: 20%;
+  border-color: var(--track-color);
+  flex:65%;
+  padding-left: 0.5rem;
+}
+/*
+in preservation and memory of nkemdi
+@media (min-width: 2400px)
+{
+  .graph
+  {
+    max-width: 1800px;
+  }
+}
+
+@media (min-width: 2100px) and (max-width: 2400px)
+{
+  .graph
+  {
+    max-width: 1500px;
+  }
+}
+
+@media (min-width: 1800px) and (max-width: 2100px)
+{
+  .graph
+  {
+    max-width: 1200px;
+  }
+}
+
+@media (min-width: 1575px) and (max-width: 1800px)
+{
+  .graph
+  {
+    max-width: 1000px;
+  }
+}
+
+
+@media (min-width: 1350px) and (max-width: 1575px)
+{
+  .graph
+  {
+    max-width: 800px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1350px)
+{
+  .graph
+  {
+    max-width: 500px;
+  }
+}
+
+@media (min-width: 0px) and (max-width: 1025px)
+{
+  .graph
+  {
+    max-width: 250px;
+  }
+}*/
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--track-color);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--ft-color);
+  opacity: 0.7;
+  border-radius: 4px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: transparent;
+}
+
+.footer {
+    max-width:80%;
+    margin: 1rem auto;
+    overflow: auto;
+    text-align: center;
+    color: var(--ft-color);
+    font-size: 17px;
+}
+
+.footer b {
+    font-size: 1.5rem;
+}
+
+.footer .footer-cols {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 2rem;
+}

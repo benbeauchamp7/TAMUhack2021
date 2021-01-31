@@ -1,0 +1,164 @@
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.stock.min.js"></script>
+<script type="text/javascript" src="stocks.js"></script>
+
+
+
+<div class="row">
+<nav class="tweet-nav">
+  <% i = 0 %>
+  <% @tweets.each do |tweet| %>
+  <div class="flex-container tweet-box" onclick="load('<%= tweet.tag %>', true)">
+    <i class="profile-pic fas fa-user-circle"></i>
+    <div>
+        <h4><%= tweet.username %> <span class="tweet-tag">(<%= tweet.tag %>)</h4>
+      <h5> <%= @timediffs[i] %> </h5>
+      <% i += 1 %>
+      <p style="width: 100%;">
+        <%= tweet.text %>
+      </p>
+    </div>      
+  </div>
+  <% end %>
+</nav>
+
+<div class="graph" id="stockChartContainer">
+</div>
+</div>
+<script type="text/javascript">
+  var stockData = []
+  var stockTarget = "GME"
+
+  window.onload = setup(); 
+  function setup() {
+    setInterval(checkThemeUpdate, 250);
+    load(undefined, true);
+  }
+
+  function checkThemeUpdate() {
+    if (localStorage.getItem('update') == "true") {
+      localStorage.setItem('update', "false");
+      load(undefined, false);
+      console.log("Loaded!");
+    }
+  }
+
+  function doChart(data) {
+    var dataPoints = [];
+      for (d of data) {
+        dataPoints.push({x: d.date, y: (d.high + d.low) / 2})
+      }
+
+      var _theme = localStorage.getItem('mode') + "2"
+      var btmtxtC = "white"
+      if (_theme == "light1" || _theme == "light2") {
+        btmtxtC = "black"
+      }
+      var currentDate = new Date();
+      var rangeChangedTriggered = false;
+      var stockChart = new CanvasJS.StockChart("stockChartContainer",{
+        theme: _theme, //"light2", "dark1", "dark2"
+        title:{
+          text: stockTarget,
+          verticalAlign: "bottom", // "top", "center", "bottom"
+          horizontalAlign: "left", // "left", "right", "center"
+          fontFamily: "Open-Sans"
+        },
+
+        colorSet: "app",
+
+        rangeChanged: function(e) {
+            rangeChangedTriggered = true;
+        },
+        charts: [{
+          axisX: {
+            crosshair: {
+              enabled: true,
+              valueFormatString: "MMM DD, YYYY HH:mm:ss"
+            }
+          },
+          
+          axisY: {
+            valueFormatString: "###,###.00",
+            fontFamily: "Open-Sans",
+            title: "Dollars per Share"
+          },
+          
+          toolTip: {
+            shared: true
+          },
+          
+          data: [{
+            type: "scatter",
+            markerSize: 2,
+            name: "USD",
+            xValueFormatString: "MMM DD, YYYY HH:mm",
+            yValueFormatString: "###,###.00",
+            xValueType: "dateTime",
+            dataPoints : dataPoints,
+            fontFamily: "Open-Sans"
+          }]
+        }],
+
+        navigator: {
+          slider: {
+            // minimum: new Date(currentDate.getTime() - (90 * 1000))
+            maskColor: "#000000",
+            maskOpacity: 0.5
+          },
+          axisX: {
+            labelFontColor: btmtxtC
+          }
+        },
+        rangeSelector: {
+          enabled: false
+        }
+      });
+
+      var dataCount = 2016, ystart = 50, interval = 1000, xstart = (currentDate.getTime() - (700 * 1000));
+      updateChart(xstart, ystart, dataCount, interval);
+      function updateChart(xstart, ystart, length, interval) {
+        var xVal = xstart, yVal = ystart;
+        xstart = xVal;
+        ystart = yVal;
+        stockChart.render();
+        // setTimeout(function() { updateChart(xstart, ystart, dataCount, interval); }, 1000);
+      }
+  }
+
+  function load(target, do_update_data) {
+    if (typeof(target) == "string") {
+      stockTarget = target.substring(1);
+    }
+
+    CanvasJS.addColorSet("app", [
+      "#3ED489",
+      "#93E9BE",
+      "#D4FAE7",
+      "#36454F",
+      "#4C5D69",
+      "#EEEEEE",
+      "#FFFFFF",
+      "#111111",
+      "#767676"
+    ])
+
+    var stocks = new Stocks('PANOR13PPA2KU93I');
+    var options = {
+      symbol: stockTarget,
+      interval: '1min',
+      amount: 10080
+    }
+
+    if (do_update_data === true) {
+      stocks.timeSeries(options).then(data => {
+        stockData = data;
+        doChart(stockData, stockTarget)
+      });
+    } else {
+      doChart(stockData, stockTarget)
+    }
+  }
+
+</script>
+
+
