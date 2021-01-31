@@ -25,6 +25,9 @@
 </div>
 </div>
 <script type="text/javascript">
+// Adapted from CanvasJS samples at:
+// https://canvasjs.com/docs/stockcharts/basics-of-creating-html5-stockchart/
+
   var stockData = []
   var stockTarget = "GME"
 
@@ -61,7 +64,9 @@
           text: stockTarget,
           verticalAlign: "bottom", // "top", "center", "bottom"
           horizontalAlign: "left", // "left", "right", "center"
-          fontFamily: "Open-Sans"
+          // fontFamily: "Open-Sans"
+          fontSize: 70,
+          padding: 37
         },
 
         colorSet: "app",
