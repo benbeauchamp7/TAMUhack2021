@@ -11,6 +11,7 @@
     "boostrap": "^2.0.0",
     "bootstrap": "^4.6.0",
     "jquery": "^3.5.1",
+    "node-fetch": "^2.6.1",
     "popper.js": "^1.16.1",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
